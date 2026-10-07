@@ -2,7 +2,7 @@
 
 ![Rungs Logo](assets/logo.png)
 
-A plugin marketplace for Claude Code and Codex.
+A plugin marketplace for Claude Code, Codex and opencode.
 It ships one plugin, `agents`: five subagents tiered by how much judgment a task needs, and a skill that routes work to them.
 See [plugins/agents/README.md](plugins/agents/README.md).
 
