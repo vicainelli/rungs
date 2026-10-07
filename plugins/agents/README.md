@@ -19,24 +19,12 @@ Five subagents tiered by how much judgment a task needs, not by job title. The m
 
 ## How handoffs work
 
-```mermaid
-flowchart LR
-    caller([Main session])
-    caller -->|brief| operator
-    caller -->|brief| builder
-    caller -->|brief| specialist
-    caller -->|brief| researcher
-    caller -->|brief| reviewer
-    operator -->|handoff| caller
-    builder -->|handoff| caller
-    specialist -->|handoff| caller
-    researcher -->|handoff| caller
-    reviewer -->|handoff| caller
-```
+![flow](../../assets/flow.png)
 
-Only the main session starts agents. There are no edges between agents.
+Only the main session starts agents. An escalation is a request in the handoff, not a direct call: the main session reads it and starts the next rung.
 Every agent ends with the same handoff block: `STATUS`, `NEXT`, `SUMMARY`, `CHANGED`, `VERIFIED`, `STATE`, `OPEN`.
 An agent that needs another one says so in `NEXT`; the main session decides whether to start it.
+Escalation climbs one rung at a time: `operator` hands up to `builder`, `builder` to `specialist`. Each rung may escalate once per task; a second escalation goes to the user.
 Any agent that changed files reports the verification command and its output, not a claim.
 Questions that belong to the user come back as `STATUS: question` and are passed on unanswered.
 
