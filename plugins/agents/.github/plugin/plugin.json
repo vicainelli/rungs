@@ -1,6 +1,6 @@
 {
   "name": "agents",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Five subagents tiered by how much judgment a task needs, plus an orchestrate skill that routes to them.",
   "agents": "copilot/agents",
   "hooks": "copilot/hooks.json"
