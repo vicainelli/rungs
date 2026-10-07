@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "command": "cat \"${COPILOT_PLUGIN_ROOT}/copilot/delegation.json\""
+      }
+    ]
+  }
+}

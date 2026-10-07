@@ -1,21 +1,21 @@
 # agents
 
-Five subagents tiered by how much judgment a task needs, not by job title. The main session decides, sequences, and talks to the user; subagents do the work and report back in one fixed handoff format. The `orchestrate` skill tells the main session whether to delegate and to whom. Claude Code is the primary target; Codex and opencode are supported through generated agent profiles.
+Five subagents tiered by how much judgment a task needs, not by job title. The main session decides, sequences, and talks to the user; subagents do the work and report back in one fixed handoff format. The `orchestrate` skill tells the main session whether to delegate and to whom. Claude Code is the primary target; Codex, opencode and Copilot CLI are supported through generated agent profiles.
 
 ## Rungs
 
-| Agent | Use when | Claude pin | Codex pin | opencode pin |
-|-------|----------|------------|-----------|--------------|
-| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low | github-copilot/claude-haiku-4.5 |
-| `builder` | The task fits an existing pattern, touches a bounded set of files, and the open choices are local | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium |
-| `specialist` | No pattern exists, the change is cross-cutting, or a wrong call is expensive | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high |
+| Agent | Use when | Claude pin | Codex pin | opencode pin | Copilot pin |
+|-------|----------|------------|-----------|--------------|-------------|
+| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low | github-copilot/claude-haiku-4.5 | claude-haiku-4.5 / low |
+| `builder` | The task fits an existing pattern, touches a bounded set of files, and the open choices are local | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium | claude-sonnet-5.5 / medium |
+| `specialist` | No pattern exists, the change is cross-cutting, or a wrong call is expensive | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high | claude-opus-5.5 / high |
 
 ## Services
 
-| Agent | Use when | Claude pin | Codex pin | opencode pin |
-|-------|----------|------------|-----------|--------------|
-| `researcher` | The caller needs facts before deciding (read-only) | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium |
-| `reviewer` | The caller is about to commit to a plan, diff, or decision with real blast radius (read-only) | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high |
+| Agent | Use when | Claude pin | Codex pin | opencode pin | Copilot pin |
+|-------|----------|------------|-----------|--------------|-------------|
+| `researcher` | The caller needs facts before deciding (read-only) | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium | claude-sonnet-5.5 / medium |
+| `reviewer` | The caller is about to commit to a plan, diff, or decision with real blast radius (read-only) | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high | claude-opus-5.5 / high |
 
 ## How handoffs work
 
@@ -78,9 +78,18 @@ This copies five agents into `${XDG_CONFIG_HOME:-~/.config}/opencode/agents/` an
 cd "${XDG_CONFIG_HOME:-$HOME/.config}/opencode" && rm agents/{operator,researcher,builder,specialist,reviewer}.md && rm -r skills/orchestrate
 ```
 
+### Copilot CLI
+
+```sh
+copilot plugin marketplace add vicainelli/rungs
+copilot plugin install agents@rungs
+```
+
+`gh copilot` launches the same CLI. The plugin ships the agents, the `orchestrate` skill and a `sessionStart` hook that injects the delegation rule, so there is nothing to paste.
+
 ## Codex routing
 
-Claude Code gets the delegation rule from the plugin's `SessionStart` hook. On Codex, paste this into `~/.codex/AGENTS.md`; on opencode, into `~/.config/opencode/AGENTS.md`:
+Claude Code and Copilot CLI get the delegation rule from the plugin's session-start hook. On Codex, paste this into `~/.codex/AGENTS.md`; on opencode, into `~/.config/opencode/AGENTS.md`:
 
 ```markdown
 ## Delegation
@@ -91,9 +100,9 @@ it decides whether and to whom to delegate.
 
 ## Development
 
-1. Edit `agents/*.md` or `skills/contract/SKILL.md`.
-2. Run `python3 scripts/build.py`. Model pins live in `PINS` (Codex) and `OPENCODE_PINS` (opencode) at the top of that script. `python3 scripts/build.py --check` writes nothing and exits 1 if a generated file has drifted.
-3. Commit the sources and the regenerated `codex/*.toml` and `opencode/agents/*.md` together. Never edit the generated files by hand.
+1. Edit `agents/*.md`, `skills/contract/SKILL.md` or `hooks/delegation.md`.
+2. Run `python3 scripts/build.py`. Model pins live in `PINS` (Codex), `OPENCODE_PINS` (opencode) and `COPILOT_PINS` (Copilot CLI) at the top of that script. `python3 scripts/build.py --check` writes nothing and exits 1 if a generated file has drifted.
+3. Commit the sources and the regenerated `codex/*.toml`, `opencode/agents/*.md` and `copilot/` together. Never edit the generated files by hand.
 
 ## Limits
 
@@ -105,3 +114,5 @@ it decides whether and to whom to delegate.
 - opencode has no SessionStart hook, so the delegation instruction lives in `AGENTS.md` and is not scoped to the primary agent. The generated agents therefore deny the `subagent` and `skill` actions.
 - opencode has one `edit` permission, so Edit and Write are the same grant.
 - The opencode pins need the GitHub Copilot provider connected in opencode; edit `OPENCODE_PINS` and rebuild to use another provider. The `#medium` / `#high` variant names have not been confirmed against a live run.
+- Copilot CLI agents have no turn cap: `maxTurns` has no equivalent, so it is not emitted.
+- An unknown model ID in `COPILOT_PINS` falls back silently to the session model.

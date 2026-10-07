@@ -4,7 +4,7 @@
   <img src="assets/rungs-logo.png" alt="Rungs Logo" width="180" height="180">
 </p>
 
-A plugin marketplace for Claude Code, Codex and opencode.
+A plugin marketplace for Claude Code, Codex, opencode and Copilot CLI.
 It ships one plugin, `agents`: five subagents tiered by how much judgment a task needs, and a skill that routes work to them.
 See [plugins/agents/README.md](plugins/agents/README.md).
 
