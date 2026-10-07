@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "include-component-in-tag": false,
+      "extra-files": [
+        { "type": "json", "path": "plugins/agents/.claude-plugin/plugin.json", "jsonpath": "$.version" },
+        { "type": "json", "path": "plugins/agents/.codex-plugin/plugin.json", "jsonpath": "$.version" },
+        { "type": "json", "path": "plugins/agents/.github/plugin/plugin.json", "jsonpath": "$.version" }
+      ]
+    }
+  }
+}
