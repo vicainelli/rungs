@@ -1,21 +1,21 @@
 # agents
 
-Five subagents tiered by how much judgment a task needs, not by job title. The main session decides, sequences, and talks to the user; subagents do the work and report back in one fixed handoff format. The `orchestrate` skill tells the main session whether to delegate and to whom. Claude Code is the primary target; Codex is supported through generated agent profiles.
+Five subagents tiered by how much judgment a task needs, not by job title. The main session decides, sequences, and talks to the user; subagents do the work and report back in one fixed handoff format. The `orchestrate` skill tells the main session whether to delegate and to whom. Claude Code is the primary target; Codex and opencode are supported through generated agent profiles.
 
 ## Rungs
 
-| Agent | Use when | Claude pin | Codex pin |
-|-------|----------|------------|-----------|
-| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low |
-| `builder` | The task fits an existing pattern, touches a bounded set of files, and the open choices are local | sonnet / medium | gpt-6-sol / medium |
-| `specialist` | No pattern exists, the change is cross-cutting, or a wrong call is expensive | opus / high | gpt-6.1-sol / high |
+| Agent | Use when | Claude pin | Codex pin | opencode pin |
+|-------|----------|------------|-----------|--------------|
+| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low | github-copilot/claude-haiku-4.5 |
+| `builder` | The task fits an existing pattern, touches a bounded set of files, and the open choices are local | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium |
+| `specialist` | No pattern exists, the change is cross-cutting, or a wrong call is expensive | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high |
 
 ## Services
 
-| Agent | Use when | Claude pin | Codex pin |
-|-------|----------|------------|-----------|
-| `researcher` | The caller needs facts before deciding (read-only) | sonnet / medium | gpt-6-sol / medium |
-| `reviewer` | The caller is about to commit to a plan, diff, or decision with real blast radius (read-only) | opus / high | gpt-6.1-sol / high |
+| Agent | Use when | Claude pin | Codex pin | opencode pin |
+|-------|----------|------------|-----------|--------------|
+| `researcher` | The caller needs facts before deciding (read-only) | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium |
+| `reviewer` | The caller is about to commit to a plan, diff, or decision with real blast radius (read-only) | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high |
 
 ## How handoffs work
 
@@ -76,9 +76,23 @@ This copies five files into `${CODEX_HOME:-~/.codex}/agents/`. An existing file 
 cd "${CODEX_HOME:-$HOME/.codex}/agents" && rm operator.toml researcher.toml builder.toml specialist.toml reviewer.toml
 ```
 
+### opencode
+
+opencode has no plugin install for this, so install from a checkout of this repo:
+
+```sh
+sh plugins/agents/scripts/install-opencode.sh
+```
+
+This copies five agents into `${XDG_CONFIG_HOME:-~/.config}/opencode/agents/` and the `orchestrate` skill into `.../opencode/skills/orchestrate/`. An existing file that differs is backed up to `<file>.bak` first. It does not touch `AGENTS.md`; paste the Delegation block from "Codex routing" below into `~/.config/opencode/AGENTS.md` (the skill is named `orchestrate` there too). To remove everything:
+
+```sh
+cd "${XDG_CONFIG_HOME:-$HOME/.config}/opencode" && rm agents/{operator,researcher,builder,specialist,reviewer}.md && rm -r skills/orchestrate
+```
+
 ## Codex routing
 
-Claude Code gets the delegation rule from the plugin's `SessionStart` hook. On Codex, paste this into `~/.codex/AGENTS.md`:
+Claude Code gets the delegation rule from the plugin's `SessionStart` hook. On Codex, paste this into `~/.codex/AGENTS.md`; on opencode, into `~/.config/opencode/AGENTS.md`:
 
 ```markdown
 ## Delegation
@@ -90,12 +104,16 @@ it decides whether and to whom to delegate.
 ## Development
 
 1. Edit `agents/*.md` or `skills/contract/SKILL.md`.
-2. Run `python3 scripts/build-codex.py`. Codex model pins live in `PINS` at the top of that script.
-3. Commit the sources and the regenerated `codex/*.toml` together. Never edit the TOML files by hand.
+2. Run `python3 scripts/build.py`. Model pins live in `PINS` (Codex) and `OPENCODE_PINS` (opencode) at the top of that script. `python3 scripts/build.py --check` writes nothing and exits 1 if a generated file has drifted.
+3. Commit the sources and the regenerated `codex/*.toml` and `opencode/agents/*.md` together. Never edit the generated files by hand.
 
 ## Limits
 
 - Read-only agents have no MCP access: their `tools` allowlist excludes everything not listed. Add specific read-only MCP tools to `tools:` if you need them.
 - Claude model aliases (`haiku`, `sonnet`, `opus`) resolve to whatever Claude Code currently maps them to.
 - Claude Code lets subagents start subagents by default. These agents cannot, because `Agent` is not in any `tools` list; adding it breaks the design.
-- On Codex, read-only is the `read-only` sandbox mode, not a tool allowlist.- The Codex profiles are generated and parsed but have not been run: no Codex CLI was available when this was built. Whether Codex subagents can start further subagents is not documented and was not tested.
+- On Codex, read-only is the `read-only` sandbox mode, not a tool allowlist.
+- The Codex profiles are generated and parsed but have not been run: no Codex CLI was available when this was built. Whether Codex subagents can start further subagents is not documented and was not tested.
+- opencode has no SessionStart hook, so the delegation instruction lives in `AGENTS.md` and is not scoped to the primary agent. The generated agents therefore deny the `subagent` and `skill` actions.
+- opencode has one `edit` permission, so Edit and Write are the same grant.
+- The opencode pins need the GitHub Copilot provider connected in opencode; edit `OPENCODE_PINS` and rebuild to use another provider. The `#medium` / `#high` variant names have not been confirmed against a live run.

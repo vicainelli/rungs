@@ -61,4 +61,4 @@ Read-only agents (`researcher`, `reviewer`) may run in parallel. Write agents ru
 
 ## 6. Platform note
 
-On Claude Code the agents are `agents:operator`, `agents:builder`, `agents:specialist`, `agents:researcher`, and `agents:reviewer`. On Codex, spawn the profile by its name (`operator`, `builder`, ...); the same rules apply.
+On Claude Code the agents are `agents:operator`, `agents:builder`, `agents:specialist`, `agents:researcher`, and `agents:reviewer`. On Codex, spawn the profile by its name (`operator`, `builder`, ...); the same rules apply. On opencode, spawn the agent by its bare name with the `subagent` tool; the same rules apply.
