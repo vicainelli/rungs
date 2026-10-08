@@ -4,6 +4,7 @@
     ".": {
       "release-type": "simple",
       "include-component-in-tag": false,
+      "bump-minor-pre-major": true,
       "extra-files": [
         { "type": "json", "path": "plugins/agents/.claude-plugin/plugin.json", "jsonpath": "$.version" },
         { "type": "json", "path": "plugins/agents/.codex-plugin/plugin.json", "jsonpath": "$.version" },

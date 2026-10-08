@@ -5,7 +5,7 @@ tools: Read, Grep, Glob
 model: opus
 effort: high
 skills:
-  - agents:contract
+  - rungs:contract
 maxTurns: 30
 ---
 

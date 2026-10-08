@@ -1,6 +1,6 @@
 ---
 name: contract
-description: Shared handoff contract preloaded into the agents plugin's subagents. Not meant to be invoked by the user or loaded on its own.
+description: Shared handoff contract preloaded into the rungs plugin's subagents. Not meant to be invoked by the user or loaded on its own.
 user-invocable: false
 ---
 

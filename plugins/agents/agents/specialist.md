@@ -5,7 +5,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash, WebFetch, WebSearch
 model: opus
 effort: high
 skills:
-  - agents:contract
+  - rungs:contract
 maxTurns: 100
 ---
 

@@ -5,7 +5,7 @@ tools: Read, Edit, Write, Grep, Glob, Bash
 model: sonnet
 effort: medium
 skills:
-  - agents:contract
+  - rungs:contract
 maxTurns: 60
 ---
 
