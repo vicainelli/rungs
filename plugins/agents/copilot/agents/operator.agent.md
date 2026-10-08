@@ -3,7 +3,7 @@
 name: "operator"
 description: "Use when the brief names exact files and exact edits, zero decisions remain, and the work is repetitive or bulk (rename across files, apply the same edit N times, move or delete files, run a given command and report its output). Do not use when any choice about naming, structure, behaviour, or error handling is left open (use builder instead)."
 tools: ["Read", "Edit", "Write", "Grep", "Glob", "Bash"]
-model: "claude-haiku-4.5"
+model: "claude-haiku-5.5"
 reasoningEffort: "low"
 ---
 

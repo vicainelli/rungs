@@ -6,7 +6,7 @@ Five subagents tiered by how much judgment a task needs, not by job title. The m
 
 | Agent | Use when | Claude pin | Codex pin | opencode pin | Copilot pin |
 |-------|----------|------------|-----------|--------------|-------------|
-| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low | github-copilot/claude-haiku-4.5 | claude-haiku-4.5 / low |
+| `operator` | Exact files and edits are named, nothing is left to decide, and the work is bulk or mechanical | haiku | gpt-6-luna / low | github-copilot/claude-haiku-5.5 | claude-haiku-5.5 / low |
 | `builder` | The task fits an existing pattern, touches a bounded set of files, and the open choices are local | sonnet / medium | gpt-6-sol / medium | github-copilot/claude-sonnet-5.5#medium | claude-sonnet-5.5 / medium |
 | `specialist` | No pattern exists, the change is cross-cutting, or a wrong call is expensive | opus / high | gpt-6.1-sol / high | github-copilot/claude-opus-5.5#high | claude-opus-5.5 / high |
 

@@ -17,7 +17,7 @@ PINS = {
 }
 # opencode model (provider/model#variant) per agent.
 OPENCODE_PINS = {
-    "operator": "github-copilot/claude-haiku-4.5",
+    "operator": "github-copilot/claude-haiku-5.5",
     "researcher": "github-copilot/claude-sonnet-5.5#medium",
     "builder": "github-copilot/claude-sonnet-5.5#medium",
     "specialist": "github-copilot/claude-opus-5.5#high",
@@ -25,7 +25,7 @@ OPENCODE_PINS = {
 }
 # Copilot CLI model + reasoning effort per agent.
 COPILOT_PINS = {
-    "operator": ("claude-haiku-4.5", "low"),
+    "operator": ("claude-haiku-5.5", "low"),
     "researcher": ("claude-sonnet-5.5", "medium"),
     "builder": ("claude-sonnet-5.5", "medium"),
     "specialist": ("claude-opus-5.5", "high"),
