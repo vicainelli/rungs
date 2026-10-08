@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "agents",
+      "name": "rungs",
       "source": "./plugins/agents",
       "description": "Five subagents tiered by how much judgment a task needs, plus an orchestrate skill that routes to them."
     }

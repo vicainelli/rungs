@@ -1,4 +1,4 @@
-# agents
+# rungs
 
 Five subagents tiered by how much judgment a task needs, not by job title. The main session decides, sequences, and talks to the user; subagents do the work and report back in one fixed handoff format. The `orchestrate` skill tells the main session whether to delegate and to whom. Claude Code is the primary target; Codex, opencode and Copilot CLI are supported through generated agent profiles.
 
@@ -36,7 +36,7 @@ The format and the rules live in one file: [skills/contract/SKILL.md](skills/con
 
 ```
 /plugin marketplace add vicainelli/rungs
-/plugin install agents@rungs
+/plugin install rungs@rungs
 ```
 
 ### Codex
@@ -48,7 +48,7 @@ codex plugin marketplace add vicainelli/rungs
 Enable the plugin in the Codex app's plugin list, or in `~/.codex/config.toml`:
 
 ```toml
-[plugins."agents@rungs"]
+[plugins."rungs@rungs"]
 enabled = true
 ```
 
@@ -82,7 +82,7 @@ cd "${XDG_CONFIG_HOME:-$HOME/.config}/opencode" && rm agents/{operator,researche
 
 ```sh
 copilot plugin marketplace add vicainelli/rungs
-copilot plugin install agents@rungs
+copilot plugin install rungs@rungs
 ```
 
 `gh copilot` launches the same CLI. The plugin ships the agents, the `orchestrate` skill and a `sessionStart` hook that injects the delegation rule, so there is nothing to paste.

@@ -1,5 +1,5 @@
 {
-  "name": "agents",
+  "name": "rungs",
   "version": "0.3.0",
   "description": "Five subagents tiered by how much judgment a task needs, plus an orchestrate skill that routes to them."
 }

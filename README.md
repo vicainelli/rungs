@@ -5,7 +5,7 @@
 </p>
 
 A plugin marketplace for Claude Code, Codex, opencode and Copilot CLI.
-It ships one plugin, `agents`: five subagents tiered by how much judgment a task needs, and a skill that routes work to them.
+It ships one plugin, `rungs`: five subagents tiered by how much judgment a task needs, and a skill that routes work to them.
 See [plugins/agents/README.md](plugins/agents/README.md).
 
 

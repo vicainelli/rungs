@@ -5,7 +5,7 @@ tools: Read, Grep, Glob, WebFetch, WebSearch
 model: sonnet
 effort: medium
 skills:
-  - agents:contract
+  - rungs:contract
 maxTurns: 40
 ---
 

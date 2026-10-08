@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "agents",
+      "name": "rungs",
       "source": {
         "source": "local",
         "path": "./plugins/agents"

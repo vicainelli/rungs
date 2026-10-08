@@ -4,7 +4,7 @@ description: Use when the brief names exact files and exact edits, zero decision
 tools: Read, Edit, Write, Grep, Glob, Bash
 model: haiku
 skills:
-  - agents:contract
+  - rungs:contract
 maxTurns: 30
 ---
 
