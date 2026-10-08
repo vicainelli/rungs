@@ -1,6 +1,6 @@
 {
   "name": "rungs",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Five subagents tiered by how much judgment a task needs, plus an orchestrate skill that routes to them.",
   "agents": "copilot/agents",
   "hooks": "copilot/hooks.json"
