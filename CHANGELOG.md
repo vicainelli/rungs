@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/vicainelli/rungs/compare/v0.3.0...v0.4.0) (2026-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* the plugin name changed from agents to rungs. Install rungs@rungs and remove agents@rungs; replace agents@rungs in settings and any agents: references with rungs:.
+
+### Features
+
+* rename plugin from agents to rungs ([#8](https://github.com/vicainelli/rungs/issues/8)) ([117300e](https://github.com/vicainelli/rungs/commit/117300e00d943b186ec9b5ae268f811a42403c5c))
+
 ## [0.3.0](https://github.com/vicainelli/rungs/compare/v0.2.0...v0.3.0) (2026-10-08)
 
 
