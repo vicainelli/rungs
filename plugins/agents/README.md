@@ -78,6 +78,25 @@ This copies five agents into `${XDG_CONFIG_HOME:-~/.config}/opencode/agents/` an
 cd "${XDG_CONFIG_HOME:-$HOME/.config}/opencode" && rm agents/{operator,researcher,builder,specialist,reviewer}.md && rm -r skills/orchestrate
 ```
 
+#### Use a different model in opencode
+
+The generated agents pin GitHub Copilot models. To change only the model, override it in opencode config instead of editing the installed Markdown. [opencode/examples/openai.json](opencode/examples/openai.json) is a copyable OpenAI mapping:
+
+| Agent | Model |
+|-------|-------|
+| `operator` | `openai/gpt-6.1-sol-fast#low` |
+| `builder`, `researcher` | `openai/gpt-6.1-sol-fast#medium` |
+| `specialist`, `reviewer` | `openai/gpt-6.1-sol#high` |
+
+- No `opencode.json` yet: copy the example to your project's `opencode.json` (or `opencode.jsonc`).
+- Existing config: merge each `agents.<name>.model` setting, preserving other agent settings. Do not overwrite the file.
+- OpenAI must be connected (`/connect`) and these IDs and variants must appear in `/models`; otherwise pick ones that do.
+- Only the model preference changes. Prompts, tools and permissions stay as installed.
+
+Where to put it: prefer the project config. The global config is `${XDG_CONFIG_HOME:-~/.config}/opencode/opencode.json`, but under current opencode V2 loading (read from its source, not tested in a live CLI) the globally installed `agents/*.md` pins win over global JSON, while project JSON wins over global Markdown. So a global JSON override will not take effect for these agents. Editing the installed Markdown also does not last: reinstalling replaces it and backs up the edited file to `.bak`.
+
+Reference: [opencode config](https://opencode.ai/v2/docs/config) and [opencode agents](https://opencode.ai/v2/docs/agents).
+
 ### Copilot CLI
 
 ```sh
@@ -113,6 +132,6 @@ it decides whether and to whom to delegate.
 - The Codex profiles are generated and parsed but have not been run: no Codex CLI was available when this was built. Whether Codex subagents can start further subagents is not documented and was not tested.
 - opencode has no SessionStart hook, so the delegation instruction lives in `AGENTS.md` and is not scoped to the primary agent. The generated agents therefore deny the `subagent` and `skill` actions.
 - opencode has one `edit` permission, so Edit and Write are the same grant.
-- The opencode pins need the GitHub Copilot provider connected in opencode; edit `OPENCODE_PINS` and rebuild to use another provider. The `#medium` / `#high` variant names have not been confirmed against a live run.
+- The opencode pins need the GitHub Copilot provider connected in opencode; to use another provider, override the models per project (see "Use a different model in opencode"), or edit `OPENCODE_PINS` and rebuild. The `#medium` / `#high` variant names in the Copilot pins have not been confirmed against a live run.
 - Copilot CLI agents have no turn cap: `maxTurns` has no equivalent, so it is not emitted.
 - An unknown model ID in `COPILOT_PINS` falls back silently to the session model.

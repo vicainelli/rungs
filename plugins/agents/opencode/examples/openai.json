@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agents": {
+    "operator": {
+      "model": "openai/gpt-6.1-sol-fast#low"
+    },
+    "builder": {
+      "model": "openai/gpt-6.1-sol-fast#medium"
+    },
+    "researcher": {
+      "model": "openai/gpt-6.1-sol-fast#medium"
+    },
+    "specialist": {
+      "model": "openai/gpt-6.1-sol#high"
+    },
+    "reviewer": {
+      "model": "openai/gpt-6.1-sol#high"
+    }
+  }
+}
