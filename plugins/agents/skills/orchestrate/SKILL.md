@@ -65,6 +65,8 @@ Then check:
 
 Read-only agents (`researcher`, `reviewer`) may run in parallel. Write agents run one at a time unless their file sets are provably disjoint.
 
+Run an agent in the foreground unless you have independent work to do while it runs. Do not start one in the background just to wait for it.
+
 ## 6. Platform note
 
 On Claude Code the agents are `rungs:operator`, `rungs:builder`, `rungs:specialist`, `rungs:researcher`, and `rungs:reviewer`. On Codex, spawn the profile by its name (`operator`, `builder`, ...); the same rules apply. On opencode, spawn the agent by its bare name with the `subagent` tool; the same rules apply. On Copilot CLI, the agents carry the same `rungs:` names; spawn them with the `task` tool.
