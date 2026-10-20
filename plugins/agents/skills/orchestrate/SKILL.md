@@ -51,6 +51,7 @@ Act on `STATUS` and `NEXT`:
 - `escalate` → start the agent named in `NEXT` with the handoff pasted verbatim. Allow one escalation per rung per task; a second goes to the user.
 - `question` → ask the user exactly what is in `OPEN`. Do not answer on their behalf.
 - `blocked` → resolve the blocker or ask the user.
+- No handoff because the run failed (model unavailable, usage limit) → nothing changed. Do not resume or retry that agent. Tell the user which agent and model failed, then do the work yourself if it fits §1, or rerun it on another agent; if that agent is not a rungs agent, paste the contract's handoff block format into its brief.
 
 Then check:
 
