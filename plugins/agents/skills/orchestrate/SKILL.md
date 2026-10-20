@@ -41,6 +41,8 @@ Every delegation prompt contains:
 
 For `reviewer`, put the artifact inline.
 
+Name only tools the target agent has. `researcher` has read, grep, glob, web fetch, and web search; `reviewer` has read, grep, and glob. Neither can edit, run shell commands, or call MCP tools, and no subagent can load skills: paste the rules it needs instead. If a step needs a tool the agent lacks, do that step yourself or give it to `operator` with the exact command.
+
 ## 4. Reading the handoff
 
 Act on `STATUS` and `NEXT`:
