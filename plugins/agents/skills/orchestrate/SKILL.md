@@ -55,6 +55,8 @@ Act on `STATUS` and `NEXT`:
 
 A named `NEXT` is a suggestion: if the remaining work fits §1, do it yourself.
 
+Carry surprising findings forward. Never tell a later agent to omit one; if you think it should be left out, say so to the user.
+
 Then check:
 
 - `STATE: partial` → resolve it before starting anything else on those files.
