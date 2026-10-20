@@ -57,5 +57,5 @@ STATE: clean | partial: <what is half-applied and where>
 OPEN: <blocker, or question with options and cost of each, or "none">
 ```
 
-Pick one value for `STATUS`, `NEXT`, and `STATE`. Read-only agents always write `CHANGED: none` and `STATE: clean`.
+Pick one value for `STATUS`, `NEXT`, and `STATE`. With `STATUS: done`, write `NEXT: none` unless an agent must act on your output (a reviewer naming who fixes a `changes-required`); never name an agent just to apply your result. Read-only agents always write `CHANGED: none` and `STATE: clean`.
 '''
