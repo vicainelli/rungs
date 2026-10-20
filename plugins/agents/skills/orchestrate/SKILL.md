@@ -33,7 +33,7 @@ When unsure between two rungs, pick the higher. A misroute downward costs a fail
 Every delegation prompt contains:
 
 - Goal, in one sentence.
-- Exact scope: files and directories in, and out.
+- Exact scope: files and directories in, and out. Paste facts you already hold (names, rows, values) instead of pointing at the file, and name large files the agent must not read. "Optionally" or "if helpful" is not scope.
 - Constraints.
 - Definition of done.
 - Verification command.
