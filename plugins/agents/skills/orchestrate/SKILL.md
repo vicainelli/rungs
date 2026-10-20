@@ -59,6 +59,7 @@ Then check:
 
 - `STATE: partial` → resolve it before starting anything else on those files.
 - `VERIFIED: not run` on a change → run the verification yourself or send the work back before treating it as done.
+- Otherwise trust `VERIFIED`. Re-check a claim yourself only when it decides the outcome (a score near a threshold, a pass/fail), with one cheap check. Do not redo the agent's research.
 
 ## 5. Parallelism
 
