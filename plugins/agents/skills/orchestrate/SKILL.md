@@ -53,6 +53,8 @@ Act on `STATUS` and `NEXT`:
 - `blocked` → resolve the blocker or ask the user.
 - No handoff because the run failed (model unavailable, usage limit) → nothing changed. Do not resume or retry that agent. Tell the user which agent and model failed, then do the work yourself if it fits §1, or rerun it on another agent; if that agent is not a rungs agent, paste the contract's handoff block format into its brief.
 
+A named `NEXT` is a suggestion: if the remaining work fits §1, do it yourself.
+
 Then check:
 
 - `STATE: partial` → resolve it before starting anything else on those files.
