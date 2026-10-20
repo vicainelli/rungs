@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/vicainelli/rungs/compare/v0.4.0...v0.5.0) (2026-10-20)
+
+
+### Features
+
+* improve agents runs ([#10](https://github.com/vicainelli/rungs/issues/10)) ([584cb75](https://github.com/vicainelli/rungs/commit/584cb754d8c04fa91a06714778f71185289eb89e))
+
 ## [0.4.0](https://github.com/vicainelli/rungs/compare/v0.3.0...v0.4.0) (2026-10-08)
 
 
