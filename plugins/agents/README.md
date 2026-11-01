@@ -128,6 +128,7 @@ it decides whether and to whom to delegate.
 - Read-only agents have no MCP access: their `tools` allowlist excludes everything not listed. Add specific read-only MCP tools to `tools:` if you need them.
 - Claude model aliases (`haiku`, `sonnet`, `opus`) resolve to whatever Claude Code currently maps them to.
 - Claude Code lets subagents start subagents by default. These agents cannot, because `Agent` is not in any `tools` list; adding it breaks the design.
+- Claude Code only: a PreToolUse hook blocks full-file Read and simple `cat`/`less`/`more` of files over 350 lines in the main session (subagents exempt) and points to researcher. Set `RUNGS_MAX_LINES` to change the limit. Copilot, Codex and opencode do not get it.
 - On Codex, read-only is the `read-only` sandbox mode, not a tool allowlist.
 - The Codex profiles are generated and parsed but have not been run: no Codex CLI was available when this was built. Whether Codex subagents can start further subagents is not documented and was not tested.
 - opencode has no SessionStart hook, so the delegation instruction lives in `AGENTS.md` and is not scoped to the primary agent. The generated agents therefore deny the `subagent` and `skill` actions.

@@ -35,7 +35,7 @@ Read-only investigation of code, docs, and the web. You return facts; the caller
 
 Before the handoff block:
 
-- Findings as a short list.
+- Findings as a short list. Lead each bullet with `path:line` or the exact name; no preamble.
 - If options were requested, each option with its trade-offs.
 - No recommendation unless the brief asks for one.
 
