@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/vicainelli/rungs/compare/v0.5.0...v0.6.0) (2026-11-02)
+
+
+### Features
+
+* block large full-file reads in the main session ([c0aae16](https://github.com/vicainelli/rungs/commit/c0aae1678c5f0a56391a18c303c1e065479333c6))
+
 ## [0.5.0](https://github.com/vicainelli/rungs/compare/v0.4.0...v0.5.0) (2026-10-20)
 
 
